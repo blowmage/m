@@ -16,7 +16,8 @@ jobs:
         gemfile:
           - minitest4
           - minitest5
-          - test_unit_gem
+          - test_unit2
+          - test_unit3
         os:
           - ubuntu-latest
           - macos-latest

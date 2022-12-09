@@ -18,8 +18,12 @@ Benchmark.ips do |bench|
     `bundle exec rake test:minitest5 TEST=test/examples/minitest_5_example_test.rb 2>/dev/null`
   end
 
-  bench.report "running m on an entire file with test-unit gem" do
-    `bundle exec rake test:test_unit_gem TEST=test/examples/test_unit_example_test.rb 2>/dev/null`
+  bench.report "running m on an entire file with test-unit2" do
+    `bundle exec rake test:test_unit2 TEST=test/examples/test_unit_example_test.rb 2>/dev/null`
+  end
+
+  bench.report "running m on an entire file with test-unit3" do
+    `bundle exec rake test:test_unit3 TEST=test/examples/test_unit_example_test.rb 2>/dev/null`
   end
 
   bench.report "running m on a specific test with minitest4" do
@@ -30,7 +34,11 @@ Benchmark.ips do |bench|
     `bundle exec rake test:minitest5 TEST=test/examples/minitest_5_example_test.rb 2>/dev/null`
   end
 
-  bench.report "running m on a specific test with test-unit gem" do
-    `bundle exec rake test:test_unit_gem TEST=test/examples/test_unit_example_test.rb 2>/dev/null`
+  bench.report "running m on a specific test with test-unit2" do
+    `bundle exec rake test:test_unit2 TEST=test/examples/test_unit_example_test.rb 2>/dev/null`
+  end
+
+  bench.report "running m on a specific test with test-unit3" do
+    `bundle exec rake test:test_unit3 TEST=test/examples/test_unit_example_test.rb 2>/dev/null`
   end
 end

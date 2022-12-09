@@ -11,26 +11,26 @@ Benchmark.ips do |bench|
   end
 
   bench.report "running m on an entire file with minitest4" do
-    `appraisal minitest4 ruby -Ilib ./bin/m test/examples/minitest_4_example_test.rb 2>/dev/null`
+    `bundle exec rake test:minitest4 TEST=test/examples/minitest_4_example_test.rb 2>/dev/null`
   end
 
   bench.report "running m on an entire file with minitest5" do
-    `appraisal minitest5 ruby -Ilib ./bin/m test/examples/minitest_5_example_test.rb 2>/dev/null`
+    `bundle exec rake test:minitest5 TEST=test/examples/minitest_5_example_test.rb 2>/dev/null`
   end
 
   bench.report "running m on an entire file with test-unit gem" do
-    `appraisal test_unit_gem ruby -Ilib ./bin/m test/examples/test_unit_example_test.rb 2>/dev/null`
+    `bundle exec rake test:test_unit_gem TEST=test/examples/test_unit_example_test.rb 2>/dev/null`
   end
 
   bench.report "running m on a specific test with minitest4" do
-    `appraisal minitest4 ruby -Ilib ./bin/m test/examples/minitest_4_example_test.rb:19 2>/dev/null`
+    `bundle exec rake test:minitest4 TEST=test/examples/minitest_4_example_test.rb 2>/dev/null`
   end
 
   bench.report "running m on a specific test with minitest5" do
-    `appraisal minitest5 ruby -Ilib ./bin/m test/examples/minitest_5_example_test.rb:19 2>/dev/null`
+    `bundle exec rake test:minitest5 TEST=test/examples/minitest_5_example_test.rb 2>/dev/null`
   end
 
   bench.report "running m on a specific test with test-unit gem" do
-    `appraisal test_unit_gem ruby -Ilib ./bin/m test/examples/test_unit_example_test.rb:15 2>/dev/null`
+    `bundle exec rake test:test_unit_gem TEST=test/examples/test_unit_example_test.rb 2>/dev/null`
   end
 end

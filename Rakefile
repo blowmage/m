@@ -1,7 +1,6 @@
 #!/usr/bin/env rake
 require "rubygems"
 require "bundler/setup"
-require "appraisal"
 require "coveralls"
 require "bundler/gem_tasks"
 require "rake/clean"
@@ -16,12 +15,26 @@ Rake::TestTask.new do |t|
   t.pattern = "test/*_test.rb"
 end
 
+namespace :test do
+  Dir.glob("gemfiles/*.gemfile").each do |gemfile|
+    name = /gemfiles\/(.*).gemfile/.match(gemfile)[1]
+    desc "Run #{name} tests"
+    task name do |rake_task|
+      gemfile_name = rake_task.name.split(":").last
+      puts "Starting #{gemfile_name} tests..."
+      sh "bundle --gemfile=gemfiles/#{gemfile_name}.gemfile && bundle exec rake test"
+    end
+  end
+end
+
 desc "Run all tests and get merged test coverage"
 task :tests do
-  system "rake test" or exit! 1
-  system "appraisal minitest4 rake test" or exit! 1
-  system "appraisal minitest5 rake test TEST=test/minitest_5_test.rb" or exit! 1
-  system "appraisal test_unit_gem rake test TEST=test/test_unit_test.rb" or exit! 1
+  Dir.glob("gemfiles/*.gemfile").each do |gemfile|
+    Bundler.with_original_env do
+      puts "Starting #{gemfile} tests..."
+      sh "bundle --gemfile=#{gemfile} && bundle exec rake test"
+    end
+  end
   Coveralls.push!
 end
 
